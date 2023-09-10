@@ -1,10 +1,13 @@
+<!-- tranformar em jsx -->
+
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Lista de Tarefas</title>
+        <title>DART | Dashboard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/styles.css">
@@ -65,78 +68,77 @@
                     </ul>
                 </div>
         
-                <!-- PRINCIPAL -->
+
                 <div class="main">
                     <div class="topbar">
                         <div class="toggle">
                             <ion-icon name="menu-outline"></ion-icon>
                         </div>
-        
-                        <!-- PROCURAR -->
-                        
+      
                         
                         <header>
                             <div class="search">
                                 <label for="">
                                     <ion-icon name="search-outline"></ion-icon>
-                                    <input id="tarefa"type="text"placeholder="digite sua tarefa">
+                                    <input id="tarefa"type="text"placeholder="digite o nome da tarefa">
                                 </label>
                             </div>
-                            <button onclick= addtarefa() id="add"class="add">adicionar</button>
+                            <img src="./dartilab.jpg" class="user" alt="#">
     
                         </header>
 
-                        
                     </div>
-                    <!-- LISTA DE DADOS -->
+                    
                     <div class="details">
                         <div class="recentOrders">
-                            <div id="arealista">
-                            
-                            
-                            </div>
                             <div class="cardHeader">
-                                <h2>Monitoramento de Tarefas</h2>
-                                <a href="#" class="btn">Ver Todos</a>
+                                <h2>Monitoramento de Tarefas do Projeto</h2>
+                                <div class="filter-dropdown">
+                                    <button id="filter-button" class="filter-button">Filtrar</button>
+                                    <div class="filter-options">
+                                        <button class="filter-option all">Todos</button>
+                                        <button class="filter-option concluido">Concluído</button>
+                                        <button class="filter-option em-andamento">Em Andamento</button>
+                                        <button class="filter-option atrasado">Atrasado</button>
+                                        <button class="filter-option indefinido">Indefinido</button>
+                                    </div>
+                                </div> 
                             </div>
+
                             <table>
+                                <tr>
+                                    
+                                    <td><input type="text" placeholder="Tarefa" id="novaTarefa"></td>
+                                    <td><input type="text" placeholder="Dados" id="novosDados"></td>
+                                    <td><input type="date" placeholder="Data de Início" id="novaDataInicio" class="data-inicio"></td>
+                                    <td><input type="date" placeholder="Data Prevista" id="novaDataPrevista" class="data-inicio"></td>
+                                    <td><input type="date" placeholder="Data de Término" id="novaDataTermino" class="data-termino"></td>
+                                    <td><button onclick="adicionarTarefa()">Adicionar</button></td>
+                                    
+                                </tr>
                                 <thead>
                                     <tr>
-                                        <td>Tarefa</td>
-                                        <td>Situação</td>
-                                        <td>Dados</td>
-                                        <td>Data de Início</td>
-                                        <td>Data de Término</td>
-                                        <td>Status</td>
+                                    <th>Tarefa</th>
+                                    <th>Dados</th>
+                                    <th>Data de Início</th>
+                                    <th>Data Prevista</th>
+                                    <th>Data de Término</th>
+                                    <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>tarefa 1</td>
-                                        <td>Informação</td>
-                                        <td>Situação</td>
-                                        
-                                        <td><input type="date" class="data-inicio"></td>
-                                        <td><input type="date" class="data-termino"></td>
-                                        <td><button onclick="alternarStatus(this)">Status</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>tarefa 2</td>
-                                        <td>Informação</td>
-                                        <td>Informação</td>
-                                        
-                                        <td><input type="date" class="data-inicio"></td>
-                                        <td><input type="date" class="data-termino"></td>
-                                        <td><button onclick="alternarStatus(this)">Status</button></td>
+                                    <tr class="tarefa">
+
                                     </tr>
                                 </tbody>
                             </table>
                             
+                            
                         </div>
-                        
                         <div class="pizza">
                         <canvas id="pieChart" width="400" height="400"></canvas>
                         </div>
+                        
                     </div>
                 </div>
             </div>

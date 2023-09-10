@@ -21,7 +21,59 @@ body{
     --black2: #999;
 }
 
-/* Adicione um estilo ao elemento pai */
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 8px;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para as caixas de texto de Tarefa e Dados */
+#novaTarefa, #novosDados {
+    width: 100%;
+}
+
+/* Estilo para os campos de data */
+.data-inicio, .data-termino, .data-prevista {
+    width: 100%;
+}
+
+.filter-options {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.filter-options button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
 
 .details {
   flex: 2; 
@@ -29,10 +81,20 @@ body{
 }
 
 .pizza {
-  display:flex;
-  flex:1
+    width: 400px; /* Largura desejada em pixels */
+    height: 300px; /* Altura desejada em pixels */
+    display:flex;
+    flex:1
 }
 
+.indice{
+
+    display: flex;
+    flex: flex-start;
+
+}
+
+.data-prevista,
 .data-inicio,
 .data-termino {
     border: none;     
@@ -108,23 +170,25 @@ body{
     white-space: nowrap;
 }
 
-/* Estilo para status "concluída" (verde) */
+
 .status-concluida {
-  background-color: #4CAF50; /* Verde */
+  background-color: #4CAF50;
   color: white;
 }
 
-/* Estilo para status "em andamento" (amarelo) */
+
 .status-em-andamento {
-  background-color: #ffbf00; /* Amarelo */
+  background-color: #ffbf00; 
   color: white;
 }
 
-/* Estilo para status "atrasado" (vermelho) */
+
+
 .status-atrasada {
-  background-color: #c50000; /* Vermelho */
+  background-color: #c50000; 
   color: white;
 }
+
 
 
 table button {
@@ -167,7 +231,7 @@ table button:hover {
     pointer-events: none;
 }
 
-/* PRINCIPAL */
+
 
 .main{
     position: absolute;
@@ -201,9 +265,7 @@ table button:hover {
 .search {
   position: relative;
   width: 50%;
-   /* Defina a largura como 50% da largura da tela */
-  /* max-width: 900px; */ /* Defina a largura máxima desejada */
-  margin: 0 auto; /* Margem auto para centralizar horizontalmente */
+  margin: 0 auto; 
 }
 
 
@@ -230,13 +292,13 @@ table button:hover {
 .user
 {
     position: relative;
-    width: 40px;
+    width: 120px;
     height: 40px;
-    border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
 }
-.user img 
+
+img 
 {
     position: absolute;
     top: 0;
@@ -244,14 +306,11 @@ table button:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    width: 24px; 
+    height: 24px; 
+    margin-right: 10px; 
 }
 
-
-a img {
-  width: 24px; 
-  height: 24px; 
-  margin-right: 10px; 
-}
 
 
 .details{
@@ -271,31 +330,52 @@ a img {
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
 }
-.cardHeader{
+.cardReader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+}
+
+
+.cardHeader {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #f5f5f5; 
 }
-.cardHeader h2{
-    font-weight: 600;
-    color: var(--blue);
+
+
+.cardHeader h2 {
+    margin: 0; 
+    font-size: 24px; 
 }
-.btn{
+
+.tarefa tr{
+
+    height: 20px;
+}
+
+.filter-button{
     position: relative;
     padding: 5px 10px;
     background: var(--blue);
     text-decoration: none;
     color: var(--white);
+    border: none;
     border-radius: 6px;
 }
 .details table{
     width: 100%;
+    height: 10px;
     border-collapse: collapse;
     margin-top: 10px;
 }
 .details table thead td{
     font-weight: 600;
 }
+
 .details .recentOrders table tr{
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -304,7 +384,7 @@ a img {
     border-bottom: none;
 }
 .details .recentOrders table tr td{
-    padding: 15px;
+    padding: 5px;
 }
 .details .recentOrders table tr td:last-child{
     text-align: end;
