@@ -8,56 +8,30 @@ let main = document.querySelector('.main');
 
 
   
+
   document.addEventListener("DOMContentLoaded", function () {
     const filterButton = document.getElementById("filter-button");
     const filterOptions = document.querySelector(".filter-options");
+    const filterOptionButtons = document.querySelectorAll(".filter-option");
   
     filterButton.addEventListener("click", function () {
       filterOptions.style.display === "block"
-      ? (filterOptions.style.display = "none")
+        ? (filterOptions.style.display = "none")
         : (filterOptions.style.display = "block");
     });
-    
-    const filterOptionButtons = document.querySelectorAll(".filter-option");
-    
+  
     filterOptionButtons.forEach(function (button) {
       button.addEventListener("click", function () {
         const filterClass = this.classList[1];
         filterButton.textContent = this.textContent;
-  
+
         filterOptions.style.display = "none";
       });
     });
-});
-
-
-
-
-
-
+  });
+  
 
 // a partir daqui ta ok
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 toggle.onclick = function(){
     navegation.classList.toggle('active')
@@ -139,7 +113,9 @@ function adicionarTarefa() {
   
     const newRow = tableBody.insertRow();
     newRow.id = `row_${contador}`;
-  
+    
+    const statusClass = `status-${tarefa.status.toLowerCase().replace(/\s+/g, '-')}`;
+    
     newRow.innerHTML = `
       <td>${tarefa.valor}</td>
       <td>
@@ -149,11 +125,13 @@ function adicionarTarefa() {
       <td>${tarefa.dataInicio}</td>
       <td>${tarefa.dataPrevista}</td>
       <td>${tarefa.dataTermino}</td> 
-      <td class="status-cell">${tarefa.status}</td>
+      <td class="status-cell"><button class="${statusClass}">${tarefa.status}</button></td>
     `;
   
     atualizarGrafico();
   }
+  
+  
   
 
 const pieChartCanvas = document.getElementById('pieChart').getContext('2d');

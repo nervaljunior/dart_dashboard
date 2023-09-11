@@ -170,8 +170,11 @@ button:hover {
     white-space: nowrap;
 }
 
-
-.status-concluida {
+.status-pendente{
+    background-color: #007bff;
+  color: #fff;
+}
+.status-concluída {
   background-color: #4CAF50;
   color: white;
 }
