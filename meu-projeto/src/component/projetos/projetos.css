@@ -1,0 +1,201 @@
+/* Estilização básica da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilo base da navegação */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* A navegação está inicialmente fora da tela */
+    width: 250px;
+    height: 100%;
+    background-color: #007bff; /* Azul */
+    color: white; /* Texto branco */
+    transition: left 0.3s ease; /* Efeito de transição */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilo para quando a navegação estiver aberta */
+  .navbar.open {
+    left: 0;
+  }
+  
+  /* Estilo para os links */
+  .navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para o ícone do menu */
+  .menu-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1; /* Garante que o ícone fique acima da navegação */
+  }
+  
+  .menu-icon span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efeito de rotação do ícone do menu ao abrir/fechar a navegação */
+  .navbar.open .menu-icon span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .navbar.open .menu-icon span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .navbar.open .menu-icon span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  /* Estilização da lista de projetos */
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  progress {
+    height: 20px;
+    width: 100px;
+    margin-left: 10px;
+  }
+  
+  /* Estilização do formulário para criar novo projeto */
+  div > input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  div > button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Estilização do projeto selecionado */
+  h3 {
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  /* Estilização da barra de progresso do projeto selecionado */
+  p {
+    margin-top: 10px;
+  }
+  
+  /* Estilização do botão para criar novo projeto */
+  div > button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  /* Estilização da aba de projetos semelhante à aba de tarefas */
+  .navegation {
+    background-color: #333;
+    color: #fff;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: left 0.3s ease-in-out;
+  }
+  
+  .navegation.active {
+    left: 0;
+  }
+  
+  .navegation ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .navegation li {
+    padding: 15px;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+  }
+  
+  .navegation li:hover {
+    background-color: #444;
+  }
+  
+  .main {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .main.active {
+    margin-left: 0;
+  }
+  
+  .toggle {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .search input[type="text"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .user {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: auto;
+  }
+  
