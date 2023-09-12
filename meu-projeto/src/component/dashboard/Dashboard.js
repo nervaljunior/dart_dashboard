@@ -1,266 +1,293 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Dashboard() {
+  
+  const history = useNavigate();
+  const { id } = useParams();
+  const [isAdminUser] = useState(false);
+  const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const [descricaoTarefaSelecionada, setDescricaoTarefaSelecionada] = useState('');
+  const [chartData, setChartData] = useState({
+    labels: ['Concluídas', 'Pendentes', 'Em Andamento', 'Atrasadas'],
+    datasets: [
+      {
+        data: [0, 0, 0, 0],
+        backgroundColor: ['#4CAF50', '#007bff', '#ffbf00', '#c50000'],
+      },
+    ],
+  });
+  const [statusSelecionado, setStatusSelecionado] = useState('Pendente');
+  const mostrarDescricaoTarefa = (descricao) => {
+    setDescricaoTarefaSelecionada(descricao);
+  };
+  
+  const [tarefas, setTarefas] = useState([]);
+  const [novaTarefa, setNovaTarefa] = useState({
+    id:1,
+    nome: 'tarefa 1',
+    valor: '',
+    dataInicio: '',
+    dataPrevista: '',
+    dataTermino: '',
+  });
 
-    const  isAuthenticated = true; 
+  useEffect(() => {
+    buscarTarefas();
+  }, []);
 
-    const [activeLinkIndex, setActiveLinkIndex] = useState(0);
+  const buscarTarefas = () => {
+    // Implemente a busca de tarefas no servidor aqui.
+    // Exemplo de uso do Axios:
+    // axios.get(`/api/projetos/${id}/tarefas`)
+    //   .then((response) => {
+    //     setTarefas(response.data);
+    //     atualizarGrafico(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error('Erro ao buscar tarefas:', error);
+    //   });
 
-    const handleLinkClick = (index) => {
-      setActiveLinkIndex(index);
+
+    const tarefasExemplo = [
+      {
+        id: 1,
+        nome:'Tarefa 1',
+        descrição: 'Elaboração do Plano de Trabalho do Projeto para entrega à AEB.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Concluída',
+      },
+      {
+        id: 2,
+        nome:'Tarefa 2',
+        descrição: 'Definição de critérios para escolha das escolas públicas-parceiras do projeto.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Concluída',
+      },
+      {
+        id: 3,
+        nome:'Tarefa 3',
+        descrição: 'Convite de adesão ao projeto às escolas públicas-parceiras compatíveis com os critérios exigidos.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+      {
+        id: 4,
+        nome:'Tarefa 4',
+        descrição: 'Reunião com as gestões escolares para explicação a respeito do projeto e assinatura do termo de adesão ao projeto.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+      {
+        id: 5,
+        nome:'Tarefa 5',
+        descrição: 'Elaboração do Plano de Monitoramento do projeto para entrega à AEB.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+      {
+        id: 6,
+        nome:'Tarefa 6',
+        descrição: 'Definição do cronograma das atividades dos produtos.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+      {
+        id: 7,
+        nome:'Tarefa 7',
+        descrição: 'Elaboração de relatório do produto 1.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+      {
+        id: 8,
+        nome:'Tarefa 8',
+        descrição: 'Entrega do relatório atualizado do plano de trabalho dos produtos à AEB para validação do produto 1.',
+        dataInicio: '2023-09-11',
+        dataPrevista: '2023-09-20',
+        dataTermino: '2023-09-18',
+        status: 'Pendente',
+      },
+    ];
+    
+
+    setTarefas(tarefasExemplo);
+    atualizarGrafico(tarefasExemplo);
+  };
+
+  const handleLinkClick = (index) => {
+    setActiveLinkIndex(index);
+  };
+
+  const handleStatusChange = (e, tarefaId) => {
+    const novoStatus = e.target.value;
+    setTarefas((tarefasAntigas) =>
+      tarefasAntigas.map((tarefa) =>
+        tarefa.id === tarefaId ? { ...tarefa, status: novoStatus } : tarefa
+      )
+    );
+  };
+  
+  const adicionarTarefa = () => {
+    // Simulando a adição de uma nova tarefa ao objeto JSON.
+
+    if (novaTarefa.valor.trim() === '') {
+      alert('Por favor, insira um valor para a tarefa.');
+      return;
+    }
+
+    const novaTarefaComStatus = {
+      id: tarefas.length + 1, // Incrementa o ID automaticamente
+      nome: `Tarefa ${tarefas.length + 1}`,
+      descrição: novaTarefa.valor, // Usar a descrição em vez de valor
+      dataInicio: novaTarefa.dataInicio,
+      dataPrevista: novaTarefa.dataPrevista,
+      dataTermino: novaTarefa.dataTermino,
+      status: 'Pendente', // Defina o status padrão aqui.
+ 
+
+    // Implemente a adição de tarefas no servidor aqui.
+    // Exemplo de uso do Axios:
+    // axios.post(`/api/projetos/${id}/tarefas`, novaTarefa)
+    //   .then((response) => {
+    //     // A tarefa foi adicionada com sucesso, você pode atualizar a lista de tarefas.
+    //     buscarTarefas();
+    //   })
+    //   .catch((error) => {
+    //     console.error('Erro ao adicionar tarefa:', error);
+    //   });
+
+    // Exemplo local (sem interação com o servidor):
+
     };
-    
-    const [chartData, setChartData] = useState({
-        labels: ['Concluídas', 'Pendentes', 'Em Andamento', 'Atrasadas'],
-        datasets: [
-          {
-            data: [0, 0, 0, 0],
-            backgroundColor: ['#4CAF50', '#007bff', '#ffbf00', '#c50000'],
-          },
-        ],
-      });
-    const [tarefasObjeto, setTarefasObjeto] = useState({});
-    const [contador, setContador] = useState(0);
-    const [filterOptionsVisible, setFilterOptionsVisible] = useState(false);
-  
-    useEffect(() => {
-        atualizarGrafico();
-      }, [tarefasObjeto]);
+/*     novaTarefaComStatus.nome = `Tarefa ${novaTarefaComStatus.id}`; */
+    setTarefas([...tarefas, novaTarefaComStatus]);
+    atualizarGrafico([...tarefas, novaTarefaComStatus]);
 
+    // Limpa os campos do formulário.
+    setNovaTarefa({
+      valor: '',
+      dataInicio: '',
+      dataPrevista: '',
+      dataTermino: '',
+    });
+  };
 
-    
-  
-    const list = document.querySelectorAll('.navegation li');
-  
-    const activeLink = (index) => {
-        list.forEach((item) => item.classList.remove('hovered'));
-        list[index].classList.add('hovered');
-      };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNovaTarefa({
+      ...novaTarefa,
+      [name]: value,
+    });
+  };
 
-      list.forEach((item, index) => item.addEventListener('mouseover', () => activeLink(index)));
-
-  
-    const adicionarTarefa = () => {
-      const novaTarefaInput = document.getElementById('novaTarefa');
-      const novosDadosInput = document.getElementById('novosDados');
-      const novaDataInicioInput = document.getElementById('novaDataInicio');
-      const novaDataPrevistaInput = document.getElementById('novaDataPrevista');
-      const novaDataTerminoInput = document.getElementById('novaDataTermino');
-  
-      const novaTarefaValor = novaTarefaInput.value.trim();
-      const novosDadosValor = novosDadosInput.value.trim();
-      const novaDataInicioValor = novaDataInicioInput.value;
-      const novaDataPrevistaValor = novaDataPrevistaInput.value;
-      const novaDataTerminoValor = novaDataTerminoInput.value;
-  
-      if (
-        novaTarefaValor !== '' &&
-        novosDadosValor !== '' &&
-        novaDataInicioValor !== '' &&
-        novaDataPrevistaValor !== '' &&
-        novaDataTerminoValor !== ''
-      ) {
-        setContador((prevContador) => prevContador + 1);
-  
-        // Calcula o status com base nas condições
-        let novoStatus = 'Pendente';
-        if (parseFloat(novosDadosValor) === 100) {
-          novoStatus = 'Concluída';
-        } else if (novaDataPrevistaValor === getCurrentDate() && parseFloat(novosDadosValor) !== 100) {
-          novoStatus = 'Atrasada';
-        } else if (parseFloat(novosDadosValor) > 0) {
-          novoStatus = 'Em Andamento';
-        }
-  
-        setTarefasObjeto((prevTarefasObjeto) => ({
-            ...prevTarefasObjeto,
-            [contador]: {
-              valor: novaTarefaValor,
-              dados: parseFloat(novosDadosValor),
-              status: novoStatus,
-              dataInicio: novaDataInicioValor,
-              dataPrevista: novaDataPrevistaValor,
-              dataTermino: novaDataTerminoValor,
-            },
-          }));
-
-        const novaTarefa = {
-          valor: novaTarefaValor,
-          dados: parseFloat(novosDadosValor),
-          status: novoStatus,
-          dataInicio: novaDataInicioValor,
-          dataPrevista: novaDataPrevistaValor,
-          dataTermino: novaDataTerminoValor,
-        };
-
-        novaTarefaInput.value = '';
-        novosDadosInput.value = '';
-        novaDataInicioInput.value = '';
-        novaDataPrevistaInput.value = '';
-        novaDataTerminoInput.value = '';
-  
-        renderizarTarefaNoHTML(novaTarefa);
-      }
-    };
-    const handleLinkMouseOver = (index) => {
-        setActiveLinkIndex(index);
-      };
-      
-
-
-    const getCurrentDate = () => {
-        const today = new Date();
-        const year = today.getFullYear();
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const day = String(today.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
-    
-      const renderizarTarefaNoHTML = (tarefa) => {
-        setContador((prevContador) => prevContador + 1);
-    
-        const newRow = document.createElement('tr');
-        newRow.id = `row_${contador}`;
-    
-        const statusClass = `status-${tarefa.status.toLowerCase().replace(/\s+/g, '-')}`;
-    
-        newRow.innerHTML = `
-          <td>${tarefa.valor}</td>
-          <td>${tarefa.dataInicio}</td>
-          <td>${tarefa.dataPrevista}</td>
-          <td>${tarefa.dataTermino}</td> 
-          <td class="status-cell"><button class="${statusClass}">${tarefa.status}</button></td>
-        `;
-    
-        const tableBody = document.querySelector('tbody');
-        tableBody.appendChild(newRow);
-    
-        atualizarGrafico();
-      };
-
-      function atualizarGrafico() {
-        const getStatusCounts = () => {
-          const counts = {
-            Concluída: 0,
-            Pendentes: 0,
-            'Em Andamento': 0,
-            Atrasadas: 0,
-          };
-      
-          for (const id in tarefasObjeto) {
-            const tarefa = tarefasObjeto[id];
-            counts[tarefa.status]++;
-          }
-      
-          return counts;
-        };
-      
-        const counts = getStatusCounts();
-      
-        const newChartData = {
-          ...chartData,
-          datasets: [
-            {
-              ...chartData.datasets[0],
-              data: [counts['Concluída'], counts['Pendentes'], counts['Em Andamento'], counts['Atrasadas']],
-            },
-          ],
-        };
-      
-        setChartData(newChartData);
-      }
-      
+  const atualizarGrafico = (tarefas) => {
+    // Implemente a atualização do gráfico com base nas tarefas aqui.
+    // Exemplo com Chart.js (usando chartData):
+    // const counts = getStatusCounts(tarefas);
+    // const newChartData = {
+    //   ...chartData,
+    //   datasets: [
+    //     {
+    //       ...chartData.datasets[0],
+    //       data: [counts['Concluída'], counts['Pendente'], counts['Em Andamento'], counts['Atrasada']],
+    //     },
+    //   ],
+    // };
+    // setChartData(newChartData);
+  };
 
   return (
     <div>
       <div className="container">
         <header>
-          <div className="navegation">
-            <ul>
-            <li
-                className={activeLinkIndex === 0 ? 'hovered' : ''}
-                onClick={() => handleLinkClick(0)}
-            
-            >
-                <a href="#">
-                <span className="tittle">DART</span>
-                </a>
-            </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="home-outline"></ion-icon></span>
-                  <span className="tittle">Painel</span>
-                </a>
+        <div className="navegation">
+              <ul>
+              <li
+                  className={activeLinkIndex === 0 ? 'hovered' : ''}
+                  onClick={() => handleLinkClick(0)}
+              
+              >
+                  <a href="#">
+                  <span className="tittle">DART</span>
+                  </a>
               </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                  <span className="tittle">Mensagem</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="help-outline"></ion-icon></span>
-                  <span className="tittle">Ajuda</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="construct-outline"></ion-icon></span>
-                  <span className="tittle">Configurações</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                  <span className="tittle">Senha</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <span className="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                  <span className="tittle">Sair</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="main">
-            <div className="topbar">
-              <div className="toggle">
-                <ion-icon name="menu-outline"></ion-icon>
-              </div>
-
-              <div className="search">
-                <label htmlFor="">
-                  <ion-icon name="search-outline"></ion-icon>
-                  <input id="tarefa" type="text" placeholder="Digite o nome da tarefa" />
-                </label>
-              </div>
-              <img src="./dartilab.jpg" className="user" alt="#" />
+                <li>
+                  <a href="#">
+                    <span className="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span className="tittle">Painel</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span className="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
+                    <span className="tittle">Mensagem</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span className="icon"><ion-icon name="help-outline"></ion-icon></span>
+                    <span className="tittle">Ajuda</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span className="icon"><ion-icon name="construct-outline"></ion-icon></span>
+                    <span className="tittle">Configurações</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span className="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                    <span className="tittle">Senha</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick={() => history('/')}>
+                    <span className="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                    <span className="tittle">Sair</span>
+                  </a>
+                </li>
+              </ul>
             </div>
 
+          <div className="main">
+          <div className="topbar">
+                <div className="toggle">
+                  <ion-icon name="menu-outline"></ion-icon>
+                </div>
+  
+                <div className="search">
+                  <label htmlFor="">
+                    <ion-icon name="search-outline"></ion-icon>
+                    <input id="tarefa" type="text" placeholder="Digite o nome da tarefa" />
+                  </label>
+                </div>
+                <img src="./dartilab.jpg" className="user" alt="#" />
+                <img src={process.env.PUBLIC_URL + '/dartilab.jpg'} className="user" alt="#" />
 
+              </div>
 
             <div className="details">
               <div className="recentOrders">
                 <div className="cardHeader">
-                  <h2>Monitoramento de Tarefas do Projeto</h2>
-                    <div className="filter-dropdown">
-                    <button id="filter-button" className="filter-button" onClick={toggleNavigation}>
-                        Filtrar
-                    </button>
-                    {filterOptionsVisible && (
-                        <div className="filter-options">
-                        <button className="filter-option all">Todos</button>
-                        <button className="filter-option concluido">Concluído</button>
-                        <button className="filter-option em-andamento">Em Andamento</button>
-                        <button className="filter-option atrasado">Atrasado</button>
-                        <button className="filter-option indefinido">Indefinido</button>
-                        </div>
-                    )}
-                  </div>
+                  <h2>Monitoramento de Tarefas do Projeto {id}</h2>
                 </div>
 
                 <table>
@@ -274,35 +301,93 @@ function Dashboard() {
                     </tr>
                   </thead>
                   <tbody>
+                  {isAdminUser && (
                     <tr className="tarefa">
-                      <td><input type="text" placeholder="Adicione a tarefa" id="novaTarefa" /></td>
-                      <td><input type="date" placeholder="Data de Início" id="novaDataInicio" className="data-inicio" /></td>
-                      <td><input type="date" placeholder="Data Prevista" id="novaDataPrevista" className="data-inicio" /></td>
-                      <td><input type="date" placeholder="Data de Término" id="novaDataTermino" className="data-termino" /></td>
-                      <td><button onClick={() => adicionarTarefa()}>Adicionar</button></td>
+                      <td>
+                        <input
+                          type="text"
+                          placeholder="Adicione a tarefa"
+                          name="valor"
+                          value={novaTarefa.valor}
+                          onChange={handleChange}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="date"
+                          placeholder="Data de Início"
+                          name="dataInicio"
+                          value={novaTarefa.dataInicio}
+                          onChange={handleChange}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="date"
+                          placeholder="Data Prevista"
+                          name="dataPrevista"
+                          value={novaTarefa.dataPrevista}
+                          onChange={handleChange}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="date"
+                          placeholder="Data de Término"
+                          name="dataTermino"
+                          value={novaTarefa.dataTermino}
+                          onChange={handleChange}
+                        />
+                      </td>
+                      <td>
+                        <button onClick={adicionarTarefa}>Adicionar</button>
+                      </td>
                     </tr>
+                  )}
+
                   </tbody>
                 </table>
+                <ul className="product-list">
+                  {tarefas.map((tarefa) => (
+                    <li key={tarefa.id} onClick={() => mostrarDescricaoTarefa(tarefa.descrição)}>
+                      <span className="product-name">{tarefa.nome}</span>
+                      <span className="product-name">{tarefa.valor}</span>
+                      <span className="product-name">{tarefa.dataInicio}</span>
+                      <span className="product-name">{tarefa.dataPrevista}</span>
+                      <span className="product-name">{tarefa.dataTermino}</span>
+                      <select
+                        value={tarefa.status}
+                        onChange={(e) => handleStatusChange(e, tarefa.id)}
+                      >
+                        <option value="Concluída">Concluída</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Atrasada">Atrasada</option>
+                      </select>
+                    </li>
+                  ))}
+                </ul>
+                <div className="descricao-tarefa">
+                  <h3>Descrição da Tarefa</h3>
+                  <p>{descricaoTarefaSelecionada}</p>
+                </div>
+
+
+
+
               </div>
-              <div className="pizza">
-                {/* <canvas id="pieChart" width="400" height="400"></canvas> */}
-{/*                 <div className="chart-container">
-                    <Pie data={chartData} />
+  {/*               <div className="pizza">
+                  <canvas id="pieChart" width="400" height="400"></canvas>
+                  <div className="chart-container">
+                      <Pie data={chartData} />
+                  </div>
                 </div> */}
-              </div>
             </div>
           </div>
         </header>
-
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <script src="js/scripts.js" async defer></script>
+        <script src="../scripts.js" async defer></script>
       </div>
     </div>
   );
 }
 
-
-
 export default Dashboard;
-

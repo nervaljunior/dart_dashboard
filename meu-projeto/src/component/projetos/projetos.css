@@ -6,19 +6,17 @@
 
 }
 body {
-margin: 0;
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-margin: 0;
-padding-top: 80px;
-font-family: Arial, Helvetica, sans-serif;
-background: #eeee;
-
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: 40px; 
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eeee;
 }
-
 code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
@@ -164,27 +162,25 @@ margin: 0 auto;
   left: 10px;
   font-size: 1.2em;
 }
-.user
-{
-  position: relative;
-  width: 120px;
-  height: 40px;
+
+.user {
+  position: fixed;
+  width: 150px; 
+  height: 50px; 
+  top: 10px;
+  left: 1100px; 
   overflow: hidden;
   cursor: pointer;
 }
 
-img 
-{
+img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  width: 24px; 
-  height: 24px; 
-  margin-right: 10px; 
 }
+
 
 .status-pendente{
   background-color: #007bff;
@@ -382,21 +378,7 @@ background-color: #a4a5a7;
       border-radius: 20px;
       background: var(--white);
   }
-  .recentCustomers .imgBox{
-      position: relative;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      overflow: hidden;
-  }
-  .recentCustomers .imgBox img{
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-  }
+
   .recentCustomers table tr td{
       padding: 12px 10px;
   }

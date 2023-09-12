@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import './projetos.css'; 
+import { useNavigate } from 'react-router-dom';
 
 function Produtos() {
+
+  const history = useNavigate();
+
 
   const [projetoSelecionado, setProjetoSelecionado] = useState(null);
 
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [isAdminUser] = useState(true);
+  const [isAdminUser] = useState(false);
   const [projetos, setProjetos] = useState([
     {
       id: 1,
       nome: 'Produto 1',
       tarefas: [
         { id: 1, nome: 'Tarefa 1', concluida: true },
-        { id: 2, nome: 'Tarefa 2', concluida: false },
+        { id: 2, nome: 'Tarefa 2', concluida: true },
+        { id: 3, nome: 'Tarefa 3', concluida: false },
+        { id: 4, nome: 'Tarefa 4', concluida: false },
+        { id: 5, nome: 'Tarefa 5', concluida: false },
+        { id: 6, nome: 'Tarefa 6', concluida: false },
+        { id: 7, nome: 'Tarefa 7', concluida: false },
+        { id: 8, nome: 'Tarefa 8', concluida: false },
         // ...
       ],
     },
@@ -33,13 +43,12 @@ function Produtos() {
   const [novoProjeto, setNovoProjeto] = useState('');
 
   const toggleNavigation = () => {
-    const navegation = document.querySelector('.navegation');
-    const main = document.querySelector('.main');
-    navegation.classList.toggle('active');
-    main.classList.toggle('active');
+    setIsNavOpen(!isNavOpen);
   };
+
   const handleVerTarefasClick = (projeto) => {
     setProjetoSelecionado(projeto);
+    history(`/dashboard/${projeto.id}`);
   };
   
   const list = document.querySelectorAll('.navegation li');
@@ -127,11 +136,12 @@ function Produtos() {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="#" onClick={() => history('/')}>
                   <span className="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                   <span className="tittle">Sair</span>
                 </a>
               </li>
+
             </ul>
           </div>
 
@@ -139,13 +149,6 @@ function Produtos() {
             <div className="topbar">
               <div className="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
-              </div>
-
-              <div className="search">
-                <label htmlFor="">
-                  <ion-icon name="search-outline"></ion-icon>
-                  <input id="tarefa" type="text" placeholder="Digite o nome da tarefa" />
-                </label>
               </div>
               <img src="./dartilab.jpg" className="user" alt="#" />
             </div>
@@ -188,8 +191,10 @@ function Produtos() {
                         value={calcularPercentual(projeto.tarefas)}
                         max="100"
                       ></progress>
-                      <button className='vertarefa' onClick={() => handleVerTarefasClick(projeto)}>Ver Tarefas</button>
-                    </li>
+                  <button className='vertarefa' onClick={() => handleVerTarefasClick(projeto)}>
+                    Ver Tarefas
+                  </button>                    
+                  </li>
                   ))}
                 </ul>
               </div>
