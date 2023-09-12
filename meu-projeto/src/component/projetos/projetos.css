@@ -1,91 +1,634 @@
-/* Estilização básica da página */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* Estilo base da navegação */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* A navegação está inicialmente fora da tela */
-    width: 250px;
-    height: 100%;
-    background-color: #007bff; /* Azul */
-    color: white; /* Texto branco */
-    transition: left 0.3s ease; /* Efeito de transição */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Estilo para quando a navegação estiver aberta */
-  .navbar.open {
-    left: 0;
-  }
-  
-  /* Estilo para os links */
-  .navbar-links a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilo para o ícone do menu */
-  .menu-icon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 1; /* Garante que o ícone fique acima da navegação */
-  }
-  
-  .menu-icon span {
-    display: block;
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Efeito de rotação do ícone do menu ao abrir/fechar a navegação */
-  .navbar.open .menu-icon span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-  
-  .navbar.open .menu-icon span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .navbar.open .menu-icon span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-  
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  box-sizing: border-box;
 
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+}
+body {
+margin: 0;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+margin: 0;
+padding-top: 80px;
+font-family: Arial, Helvetica, sans-serif;
+background: #eeee;
+
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root{
+    --blue: #287bff;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+
+ input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 8px;
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+#novaTarefa, #novosDados {
+    width: 100%;
+}
+
+
+.data-inicio, .data-termino, .data-prevista {
+    width: 100%;
+}
+
+.filter-options {
+    display: none;
+    position: absolute;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.filter-options button {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+.details {
+  flex: 2; 
+  padding-right:20px; 
+}
+
+.pizza {
+    width: 400px; 
+    height: 300px; 
+    display:flex;
+    flex:1
+}
+
+.indice{
+
+    display: flex;
+    flex: flex-start;
+
+}
+
+.data-prevista,
+.data-inicio,
+.data-termino {
+  width: 100%;
+    border: none;        
+    outline: none;  
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin-bottom: 8px;
+    outline: none;   
+}
+.topbar{
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  display: flex;
+}
+.toggle{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
+  cursor: pointer;
+}
+
+.search {
+position: relative;
+width: 50%;
+margin: 0 auto; 
+}
+
+
+.search label{
+  position: relative;
+  width: 100%;   
+}
+.search label input{
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  padding: 5px 20px;
+  padding-left: 35px;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid var(--black2);
+}
+.search label ion-icon{
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 1.2em;
+}
+.user
+{
+  position: relative;
+  width: 120px;
+  height: 40px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+img 
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  width: 24px; 
+  height: 24px; 
+  margin-right: 10px; 
+}
+
+.status-pendente{
+  background-color: #007bff;
+color: #fff;
+}
+.status-concluída {
+background-color: #4CAF50;
+color: white;
+}
+
+
+.status-em-andamento {
+background-color: #ffbf00; 
+color: white;
+}
+
+
+
+.status-atrasada {
+background-color: #c50000; 
+color: white;
+}
+
+
+
+table button {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+border-radius: 4px;
+}
+
+table button:hover {
+background-color: #a4a5a7;
+}
+
+@media (max-width: 1335px)
+{
+  .navegation
+  {
+      left: -300px;
+  }
+  .navegation.active
+  {
+      width: 300px;
+      left: 0px;
   }
   
-  h2 {
-    color: #333;
+  .main
+  {
+      width: 100%;
+      left: 0;
+  }
+  .main.active
+  {
+      left: 300px;
+  }
+  .cardBox
+  {
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px)
+{
+  .details
+  {
+      grid-template-columns: repeat(1, 1fr);
+  }
+  .recentOrders
+  {
+      overflow-x: auto;
+  }
+}
+@media (max-width: 560px)
+{
+  .cardBox   
+  {
+      grid-template-columns: repeat(1, 1fr);
+  }
+  .cardHeader
+  {
+      font-size: 20px;
+  }
+  .user
+  {
+      min-width: 40px;
+  }
+  .navegation
+  {
+      width: 100%;
+      left: -110%;
+      z-index: 1000;
+  }
+  .navegation.active
+  {
+      width: 100%;
+      left: 0;
+  }
+  .toggle
+  {
+      z-index: 10001;
+  }
+  .main.active .toggle
+  {
+      color: #fff;
+      position: fixed;
+      left: initial;
+      color: var(--white);
+  }
+}
+
+.add {
+  width: 180px;  
+  cursor: pointer;
+  background: green;
+  color: white;
+  font-weight: bold;
+  border: none;
+  height: 50px;
+  border-radius: 20px;
+} 
+ main{
+    display: flex;
+    flex-flow: row wrap;
+    width: 90%;
+    margin: auto auto;
+    border: 1px solid blue;
+    padding-top: 40px;
+}
+.item{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0 0 20px;
+    margin-bottom: 2%;
+    cursor: pointer;
+
+}
+.item-icone{
+    flex: 10%;
+    border: 1px solid orange;
+    text-align: center;
+    font-size: 2rem;
+    
+
+}
+.item-nome{
+    flex: 65%;
+    border: 1px solid deeppink;
+    font-size: 20px;
+    font-weight: bold;
+
+
+}
+.item-botao{
+    flex: 25%;
+    border: 1px solid green;
+
+
+} 
+ 
+  .material-icons.md-36 {
+    font-size: 36px;
+  }
+  .material-icons.md-48 {
+    font-size: 48px;
+  }
+  .material-icons.tomato {
+    color: tomato;
+  }
+  .material-icons.royalblue {
+    color: royalblue;
+  } 
+
+  input{
+      height: 35px;
+      font-size: 2rem;
+      width: 70%;
+      padding-left: 10%;
+  
   }
   
-  /* Estilização da lista de projetos */
-  ul {
-    list-style-type: none;
-    padding: 0;
+  .recentCustomers{
+      position: relative;
+      display: grid;
+      min-height: 500px;
+      padding: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      background: var(--white);
+  }
+  .recentCustomers .imgBox{
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+  }
+  .recentCustomers .imgBox img{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  .recentCustomers table tr td{
+      padding: 12px 10px;
+  }
+  .recentCustomers table tr td h4{
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.2em;
+  }
+  .recentCustomers table tr td h4 span{
+      font-size: 14px;
+      color: var(--black2);
+  }
+
+    .delete{
+      background: red;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 20px;
+    } 
+    
+     .item.clicado{
+      background: rgb(118, 185, 118);
+      color: green;
+  
+    } 
+
+    h1{
+      text-align: center;
+      font-size: 3rem;
+  }
+  header{
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      width: 90%;
+      
+      margin: auto auto;
   }
   
-  li {
+  .status.stable{
+      padding: 4px 12px;
+      background: #8de02c;
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+  }
+  .status.attention{
+      padding: 4px 8px;
+      background: #FFD700;
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+  }
+  .status.critical{
+      padding: 4px 13px;
+      background: #FF0000;
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+  }
+
+  .filter-button{
+      position: relative;
+      padding: 5px 10px;
+      background: var(--blue);
+      text-decoration: none;
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+  }
+
+  .main{
+      position: absolute;
+      width: calc(100% - 300px);
+      left: 300px;
+      min-height: 100vh;
+      background: var(--white);
+      transition: 0.5s;
+  }
+
+  .main.active{
+      width: calc(100% - 70px);
+      left: 70px;
+  }
+
+  .cardReader {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start; 
+  }
+  
+  
+  .cardHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background-color: #f5f5f5; 
+  }
+  
+  
+  .cardHeader h2 {
+      margin: 0; 
+      font-size: 24px; 
+  }
+  
+  .tarefa tr{
+  
+      height: 20px;
+  }
+  .details {
+      position: relative;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-gap: 0px;
+    }
+    
+    .details .recentOrders {
+      align-items: center;
+      position: relative;
+      display: grid;
+      min-height: 25px;
+      background: var(--white);
+      padding: 20px;
+      box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      grid-row: 1;
+    }
+    .navegation {
+      width: 300px;
+      height: 100%;
+      background: var(--blue);
+      border-left: 10px solid var(--blue);
+      transition: 0.5s;
+      overflow: hidden;
+      left: 0;
+    }
+
+
+.navegation.active{
+    width: 70px ;
+}
+.navegation ul{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.navegation ul li{
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.navegation ul li:hover,
+.navegation ul li.hovered{
+    background: var(--white);
+}
+.navegation ul li:nth-child(1){
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+.navegation ul li a{
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+.navegation ul li:hover a,
+.navegation ul li.hovered a{
+    color: var(--blue);
+}
+.navegation ul li a .icon{
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 70px;
+    text-align: center;
+}
+.navegation ul li a .icon ion-icon{
+    font-size: 1.75em;
+}
+.navegation ul li a .tittle{
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+   .navegation ul li:hover a::before,
+.navegation ul li.hovered a::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+.navegation ul li:hover a::after,
+.navegation ul li.hovered a::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+
+  
+ .product-list li {
     background-color: #f8f8f8;
     padding: 10px;
     border: 1px solid #ddd;
@@ -98,104 +641,26 @@ body {
     height: 20px;
     width: 100px;
     margin-left: 10px;
+    background-color: #ffffff;
   }
-  
-  /* Estilização do formulário para criar novo projeto */
+
   div > input[type="text"] {
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-right: 10px;
+    width: 600px; 
   }
-  
-  div > button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
+
+  .input-container {
+  display: flex;
+  align-items: center;
+}
+
+.product-name {
+  flex: 1; } 
+
+  .vertarefa {
+    margin-left: 10px; 
+    
   }
-  
-  /* Estilização do projeto selecionado */
-  h3 {
-    color: #333;
-    margin-top: 20px;
-  }
-  
-  /* Estilização da barra de progresso do projeto selecionado */
-  p {
-    margin-top: 10px;
-  }
-  
-  /* Estilização do botão para criar novo projeto */
-  div > button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  /* Estilização da aba de projetos semelhante à aba de tarefas */
-  .navegation {
-    background-color: #333;
-    color: #fff;
-    width: 250px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: -250px;
-    transition: left 0.3s ease-in-out;
-  }
-  
-  .navegation.active {
-    left: 0;
-  }
-  
-  .navegation ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .navegation li {
-    padding: 15px;
-    border-bottom: 1px solid #555;
-    cursor: pointer;
-  }
-  
-  .navegation li:hover {
-    background-color: #444;
-  }
-  
-  .main {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease-in-out;
-  }
-  
-  .main.active {
-    margin-left: 0;
-  }
-  
-  .toggle {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .search input[type="text"] {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-right: 10px;
-  }
-  
-  .user {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-left: auto;
-  }
-  

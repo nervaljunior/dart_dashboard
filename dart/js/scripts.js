@@ -9,26 +9,26 @@ let main = document.querySelector('.main');
 
   
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const filterButton = document.getElementById("filter-button");
-    const filterOptions = document.querySelector(".filter-options");
-    const filterOptionButtons = document.querySelectorAll(".filter-option");
-  
-    filterButton.addEventListener("click", function () {
-      filterOptions.style.display === "block"
-        ? (filterOptions.style.display = "none")
-        : (filterOptions.style.display = "block");
-    });
-  
-    filterOptionButtons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        const filterClass = this.classList[1];
-        filterButton.textContent = this.textContent;
+document.addEventListener("DOMContentLoaded", function () {
+  const filterButton = document.getElementById("filter-button");
+  const filterOptions = document.querySelector(".filter-options");
+  const filterOptionButtons = document.querySelectorAll(".filter-option");
 
-        filterOptions.style.display = "none";
-      });
+  filterButton.addEventListener("click", function () {
+    filterOptions.style.display === "block"
+      ? (filterOptions.style.display = "none")
+      : (filterOptions.style.display = "block");
+  });
+
+  filterOptionButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const filterClass = this.classList[1];
+      filterButton.textContent = this.textContent;
+
+      filterOptions.style.display = "none";
     });
   });
+});
   
 
 // a partir daqui ta ok

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Projetos from '../projetos/projetos';
-import { Pie } from 'react-chartjs-2';
 
 
 function Dashboard() {
@@ -30,12 +28,8 @@ function Dashboard() {
         atualizarGrafico();
       }, [tarefasObjeto]);
 
-    const toggleNavigation = () => {
-      const navegation = document.querySelector('.navegation');
-      const main = document.querySelector('.main');
-      navegation.classList.toggle('active');
-      main.classList.toggle('active');
-    };
+
+    
   
     const list = document.querySelectorAll('.navegation li');
   
